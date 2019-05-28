@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
+  repository: test_airports-assembly
+  tag: v1
   pullPolicy: IfNotPresent
 
 nameOverride: ""
