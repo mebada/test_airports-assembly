@@ -36,15 +36,15 @@ spec:
             httpGet:
               path: /health/live
               port: http
-            initialDelaySeconds: 30
-            periodSeconds: 30
+            initialDelaySeconds: 40
+            periodSeconds: 15
            
           readinessProbe:
              exec:
                command:
                - /bin/bash
                - "/isReady.sh"
-             initialDelaySeconds: 30
+             initialDelaySeconds: 40
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
