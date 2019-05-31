@@ -22,13 +22,22 @@ pipeline {
                     } else {
                       println("sha2 check failed")
                       error "This pipeline stops here!"
-                }
                    }
-                   //sha1 "airports-assembly-1.0.1.jar"
-                
-                sh "ls -rtlh"   
-                //sh 'minikube start'
+                   } //end of script
+                 
+            } //end of steps
+        } //end of stage
+        
+        stage('Build Docker Image') {
+            script{
+             sh "eval $(minikube docker-env)"
+             sh "docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
+             sh "kubectl cluster-info"
+             sh "helm init"
+
             }
+            
         }
-    }
-}
+        
+    } //end of stages
+} // end of pipeline
