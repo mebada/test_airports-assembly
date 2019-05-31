@@ -29,7 +29,7 @@ pipeline {
             steps {
                script{
                      sh "minikube start"
-                     sh "eval \$(minikube docker-env) && docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
+                     sh "eval \$(minikube docker-env) && docker build -t test_airports-assembly:v1  -f docker/Dockerfile . && helm init && helm install  kubernetes/airports-assembly --name dev-airports-assembly"
                      sh "kubectl cluster-info"
                }
             
@@ -39,7 +39,7 @@ pipeline {
             steps {
                script{
                      sh "helm init"
-sh "helm install  kubernetes/airports-assembly --name dev-airports-assembly"
+
 
                      //sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
                      sh "kubectl get pods"
