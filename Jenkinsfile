@@ -39,8 +39,9 @@ pipeline {
             steps {
                script{
                      sh "helm init"
+sh "helm install  kubernetes/airports-assembly --name dev-airports-assembly"
 
-                     sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
+                     //sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
                      sh "kubectl get pods"
                }
             
