@@ -6,7 +6,7 @@ pipeline {
                println("Checkout existing JARS from interview-test repo. ") 
                dir('interview-test'){
                    git branch: 'master',
-                   url: 'https://git@github.com/SlashTec/interview-test.git
+                   url: 'https://git@github.com/SlashTec/interview-test.git'
                } 
                script {
                    def fileName = "airports-assembly-1.0.1.jar"
