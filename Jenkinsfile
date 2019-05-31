@@ -25,7 +25,6 @@ pipeline {
                    }
                    } //end of script
                  
-            } //end of steps
         } //end of stage
         
         stage('Build Docker Image') {
