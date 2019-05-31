@@ -31,7 +31,6 @@ pipeline {
                      sh "minikube start"
                      sh "eval \$(minikube docker-env) && docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
                      sh "kubectl cluster-info"
-                     sh "helm init"
                }
             
             }
@@ -39,6 +38,8 @@ pipeline {
         stage('Deployment') {
             steps {
                script{
+                     sh "helm init"
+
                      sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
                      sh "kubectl get pods"
                }
