@@ -36,5 +36,14 @@ pipeline {
             
             }
         } 
+        stage('Deployment') {
+            steps {
+               script{
+                     sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
+                     sh "kubectl get pods"
+               }
+            
+            }
+        } 
     } //end of stages
 } // end of pipeline
