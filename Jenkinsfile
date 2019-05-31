@@ -30,7 +30,7 @@ pipeline {
         
         stage('Build Docker Image') {
             script{
-             sh "eval $(minikube docker-env)"
+             sh "eval \$(minikube docker-env)"
              sh "docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
              sh "kubectl cluster-info"
              sh "helm init"
