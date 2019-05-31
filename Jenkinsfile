@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'master' }
     stages {
-        stage('checkout') {
+        stage('Download JAR') {
             
             
             steps {
@@ -9,14 +9,15 @@ pipeline {
                dir('interview-test'){
                    git branch: 'master',
                    url: 'https://git@github.com/SlashTec/interview-test.git'
-        
-               }
+              }
                  
-                   
-                                   script  {
-                   sha1sum = sh(returnStdout: true, script: "sha1sum interview-test/airports-assembly-1.0.1.jar")
+            script {
+                   def fileName = "airports-assembly-1.0.1.jar"
+                   def expectedSHA1 = "0bd35ea555b9aabaf30d255f3cb90aedf6bebca1"
+                   sh "echo ${fileName}" 
+                   sha1sum = sh(returnStdout: true, script: "sha1sum interview-test/${fileName}")
                    print sha1sum
-                   if (sha1sum.contains("0bd35ea555b9aabaf30d255f3cb90aedf6bebca1")){
+                   if (sha1sum.contains("${expectedSHA1}")){
                      println("sha1 check passed")
                     } else {
                       println("sha2 check failed")
