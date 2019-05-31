@@ -29,8 +29,7 @@ pipeline {
             steps {
                script{
                      sh "minikube start"
-                     sh "eval \$(minikube docker-env)"
-                     sh "docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
+                     sh "eval \$(minikube docker-env) && docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
                      sh "kubectl cluster-info"
                      sh "helm init"
                }
