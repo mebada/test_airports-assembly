@@ -17,8 +17,12 @@ pipeline {
                    if (sha1sum.contains("${expectedSHA1}")){
                      println("sha1 check passed")
                      println("Updating Docker File")
-                     def text = readFile "docker/Dockerfile"
-                     text.replaceAll("airports-assembly-x", "${fileName}")                 
+                     def file = new File('docker/Dockerfile') 
+                     def fileContents = file.getText('UTF-8')
+                     fileContents = fileContents.replaceAll("airports-assembly-x", "${fileName}")    
+                     file.setText(fileContents, 'UTF-8')  
+                     sh "cat docker/Dockerfile "  
+                    
                     } else {
                       println("sha2 check failed")
                       error "This pipeline stops here!"
