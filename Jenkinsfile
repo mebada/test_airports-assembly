@@ -17,8 +17,8 @@ pipeline {
                    if (sha1sum.contains("${expectedSHA1}")){
                      println("sha1 check passed")
                      println("Updating Docker File")
-                     sh 'sed -i -e "s/airports-assembly-x/${fileName}/g" docker/Dockerfile '
-
+                     def text = readFile "docker/Dockerfile"
+                     text.replaceAll("airports-assembly-x", "${fileName}")                 
                     } else {
                       println("sha2 check failed")
                       error "This pipeline stops here!"
