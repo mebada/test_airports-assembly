@@ -16,6 +16,9 @@ pipeline {
                    print sha1sum
                    if (sha1sum.contains("${expectedSHA1}")){
                      println("sha1 check passed")
+                     println("Updating Docker File")
+                     sh 'sed -i -e "s/airports-assembly-x/${fileName}/g"'
+
                     } else {
                       println("sha2 check failed")
                       error "This pipeline stops here!"
@@ -29,7 +32,7 @@ pipeline {
             steps {
                script{
                     //sh "minikube start"
-                     sh "eval \$(minikube docker-env) && docker build -t test_airports-assembly:v1  -f docker/Dockerfile . && helm init && helm install  kubernetes/airports-assembly --name dev-airports-assembly"
+                     sh "eval \$(minikube docker-env) && docker build -t test_airports-assembly:v1  -f docker/Dockerfile . "
                      sh "kubectl cluster-info"
                }
             
@@ -41,7 +44,7 @@ pipeline {
                      sh "helm init"
 
 
-                     //sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
+                     sh "helm upgrade dev-airports-assembly  kubernetes/airports-assembly/  --install --recreate-pods --force"
                      sh "kubectl get pods"
                }
             
