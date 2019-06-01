@@ -9,8 +9,8 @@ pipeline {
                    url: 'https://git@github.com/SlashTec/interview-test.git'
                } 
                script {
-                   def fileName = "airports-assembly-1.0.1.jar"
-                   def expectedSHA1 = "0bd35ea555b9aabaf30d255f3cb90aedf6bebca1"
+                   def fileName = "airports-assembly-1.1.0.jar"
+                   def expectedSHA1 = "40d479396e37f61b88913ad3de3a421c75ed8f45"
                    sh "echo ${fileName}" 
                    sha1sum = sh(returnStdout: true, script: "sha1sum interview-test/${fileName}")
                    print sha1sum
