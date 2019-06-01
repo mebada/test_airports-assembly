@@ -17,7 +17,7 @@ pipeline {
                    if (sha1sum.contains("${expectedSHA1}")){
                      println("sha1 check passed")
                      println("Updating Docker File")
-                     sh 'sed -i -e "s/airports-assembly-x/${fileName}/g" Docker/dockerfile '
+                     sh 'sed -i -e "s/airports-assembly-x/${fileName}/g" docker/Dockerfile '
 
                     } else {
                       println("sha2 check failed")
