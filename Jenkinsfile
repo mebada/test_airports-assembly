@@ -19,7 +19,7 @@ pipeline {
                      println("Updating Docker File")
                      def text = readFile "docker/Dockerfile"
                           
-                     writeFile(file: "docker/Dockerfile", text: text.replaceAll("airports-assembly-x", "${fileName}") , encoding: "UTF-8") 
+                     writeFile(file: "docker/Dockerfile", text: text.replaceAll("airports-assembly-x.jar", "${fileName}") , encoding: "UTF-8") 
                      sh "cat docker/Dockerfile"  
                     
                     } else {
